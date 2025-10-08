@@ -1,7 +1,8 @@
-package com.dcl.accommodate.model.entity;
+package com.dcl.accommodate.model;
 
-import com.dcl.accommodate.model.enums.UserRoles;
+import com.dcl.accommodate.enums.UserRoles;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,10 +14,10 @@ import java.util.UUID;
 
 @Data
 @Entity
+@Builder
 @Table(name = "users")
 @EntityListeners({AuditingEntityListener.class})
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
@@ -47,7 +48,7 @@ public class User {
     @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "created_date", nullable = false , updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private Instant createdDate;
 

@@ -1,4 +1,4 @@
-package com.dcl.accommodate.model.enums;
+package com.dcl.accommodate.enums;
 
 public enum UserRoles {
 
