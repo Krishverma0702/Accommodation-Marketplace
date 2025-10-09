@@ -50,7 +50,7 @@ public class User {
     @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "created_date",nullable = false, updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     private Instant createdDate;
 
