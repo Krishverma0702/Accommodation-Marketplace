@@ -24,11 +24,11 @@ public class JwtService {
 
     private final Key key;
 
-    public JwtService(AppEnv env){
+    public JwtService(AppEnv env) {
         this.key = Keys.hmacShaKeyFor(Base64.getDecoder().decode(env.getJwt().getSecret()));
     }
 
-    public String generateAccessToken(Map<String,Object> claims, String subject, Duration ttl){
+    public String generateAccessToken(Map<String, Object> claims, String subject, Duration ttl) {
         var systemMillis = System.currentTimeMillis();
         return Jwts.builder()
                 .setClaims(claims)
@@ -39,18 +39,18 @@ public class JwtService {
                 .compact(); //
     }
 
-    public String generateRefreshToken( String subject, Duration ttl){
+    public String generateRefreshToken(String subject, Duration ttl) {
         var systemMillis = System.currentTimeMillis();
         return Jwts.builder()
                 .setIssuedAt(new Date(systemMillis))
                 .setExpiration(new Date(systemMillis + ttl.toMillis()))
                 .setSubject(subject)
                 .signWith(key, SignatureAlgorithm.HS256)
-                .compact(); //
+                .compact();
     }
 
 
-    private Claims getClaims(String token){
+    private Claims getClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()//return a parser to parse JWT
